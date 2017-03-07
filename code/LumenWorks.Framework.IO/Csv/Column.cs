@@ -50,6 +50,11 @@ namespace LumenWorks.Framework.IO.Csv
         public NumberStyles NumberStyles { get; set; }
 
         /// <summary>
+        /// A delegate to a custom data converter function to convert a string value to the expected type.
+        /// </summary>
+        public ColumnDataConverter Converter { get; set; }
+
+        /// <summary>
         /// Converts the value into the column type.
         /// </summary>
         /// <param name="value">Value to use</param>
@@ -57,6 +62,7 @@ namespace LumenWorks.Framework.IO.Csv
         public object Convert(string value)
         {
             object x;
+
             TryConvert(value, out x);           
 
             return x;
@@ -71,6 +77,12 @@ namespace LumenWorks.Framework.IO.Csv
         public bool TryConvert(string value, out object result)
         {
             bool converted;
+
+            if (Converter != null)
+            {
+                if (Converter(value, out result))
+                    return true;
+            }
 
             switch (typeName)
             {
@@ -172,7 +184,7 @@ namespace LumenWorks.Framework.IO.Csv
                     result = value;
                     break;
             }
-
+            
             return converted;
         }
     }

@@ -38,6 +38,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Csv\Column.cs" />
+    <Compile Include="Csv\ColumnDataConverter.cs" />
     <Compile Include="Csv\CsvReader.DataReaderValidations.cs" />
     <Compile Include="Csv\Events\ParseErrorEventArgs.cs" />
     <Compile Include="Csv\Exceptions\MalformedCsvException.cs" />
